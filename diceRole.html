@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ダイスロール</title>
+</head>
+<body>
+    <h1>ダイスロール</h1>
+    <p>サイコロの面の数と振る個数を指定してください</p>
+    <p>サイコロの面の数 <input type="number" name="numSides" max="20" min="1" value="6"></p>
+    <p>振る個数 <input type="number" name="numDices" max="20" min="1" value="2"></p>
+    <p>出た目：<span class="totalValue"></span></p>
+    <button class="diceRoleStart">サイコロを振る</button>
+    <script>
+    'use strict';
+
+    class Dice {
+        constructor(numSides, numDices){
+            this.numSides = numSides; // 1つのサイコロの面の数
+            this.numDices = numDices; // 振るサイコロの数
+        }
+        /* ----------
+        サイコロを振るメソッド
+        ---------- */
+        roll(){
+            let value = [];
+            for(let i=0; i<this.numDices; i++){
+                value[i] = Math.floor(Math.random() * this.numSides) + 1;
+            }
+
+            return value;
+        }
+    }
+
+    document.querySelector('.diceRoleStart').addEventListener('click', (event) => {
+        const numSides = document.querySelector('[name="numSides"]').value;
+        const numDices = document.querySelector('[name="numDices"]').value;
+        const dice = new Dice(numSides, numDices);
+        document.querySelector('.totalValue').textContent = dice.roll();
+    });
+
+    </script>
+</body>
+</html>
